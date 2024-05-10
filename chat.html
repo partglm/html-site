@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<title>chat</title>
+<head>
+  <style>
+    body {
+      background-color: black;    
+    }
+    .message-display {
+      color: white;
+    }
+    .button {
+     --color: #00A97F;
+     padding: 0.8em 1.7em;
+     background-color: transparent;
+     border-radius: .3em;
+     position: relative;
+     overflow: hidden;
+     cursor: pointer;
+     transition: .5s;
+     font-weight: 400;
+     font-size: 17px;
+     border: 1px solid;
+     font-family: inherit;
+     text-transform: uppercase;
+     color: var(--color);
+     z-index: 1;
+     top: 100px;
+    }    
+    .button::before, .button::after {
+     content: '';
+     display: block;
+     width: 50px;
+     height: 50px;
+     transform: translate(-50%, -50%);
+     position: absolute;
+     border-radius: 50%;
+     z-index: -1;
+     background-color: var(--color);
+     transition: 1s ease;
+    }    
+    .button::before {
+     top: -1em;
+     left: -1em;
+    }    
+    .button::after {
+     left: calc(100% + 1em);
+     top: calc(100% + 1em);
+    }    
+    .button:hover::before, .button:hover::after {
+     height: 410px;
+     width: 410px;
+    }    
+    .button:hover {
+     color: rgb(10, 25, 30);
+    }    
+    .button:active {
+     filter: brightness(.8);
+    }
+    #regis {
+      position: absolute;
+      top: 100px;
+      left: 450px;
+      background-color: rgb(161, 13, 13);
+      color: rgb(0, 162, 255);
+    }
+  </style>  
+</head>
+<body>
+  <input id="speudo" class="speudo" type="text">
+  <button id="soumettre-speudo" class="soumettre-speudo">soumettre</button>  
+  <input id="mdp" class="mdp" type="text">
+  <input id="chat" class="chat" type="text">
+  <button id="soumettre-mdp" class="soumettre-mdp">soumettre le mdp</button> 
+  <button id="msg" class="msg">envoyé</button>
+  <button id="admin" class="button">admin</button>
+  <p id="message-display" class="message-display"></p>
+  <a id="regis" class="regis" href="/register">sign in</a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script>
+        const socket = io();
+          let speudova = ''
+          let banv = ''
+          socket.on('rspeud', rspeud => {
+          if (speudova == rspeud) {
+           window.location.href = "/401";
+          }; 
+        }); 
+                socket.on('rickrr', rickr => {
+          if (speudova == rickr) {
+           window.location.href = "/418";
+          }; 
+        }); 
+        socket.on('cban', banv => {
+          if (document.getElementById('soumettre-speudo').value == banv) {
+           window.location.href = "/403";
+          }; 
+        });
+        socket.on('cban', datat => {
+          if (document.getElementById('soumettre-speudo').value == datat) {
+           window.location.href = "/403";
+          }; 
+        });
+        socket.on('cban', () => {
+          if (document.getElementById('soumettre-speudo').value == banv) {
+           window.location.href = "/403";
+          }; 
+        });
+
+        socket.on('message', (msg) => {
+            simulateSocketMessage(msg);
+        });
+
+        function simulateSocketMessage(message) {
+            messages.unshift(message);
+            if (messages.length > 10) {
+                messages.pop();
+              }
+            updateMessages();
+        }
+
+        function updateMessages() {
+            const messageContainer = document.getElementById('message-display');
+            messageContainer.innerHTML = '';
+            messages.forEach((message, index) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = `${index + 1}. ${message}`;
+                messageContainer.appendChild(messageDiv);
+            });
+        }
+
+        const messages = [];
+
+        document.getElementById('soumettre-speudo').addEventListener('click', () => {
+            const speudov = document.getElementById("speudo").value;
+            speudova = speudov;
+            socket.emit('speudo', speudov);
+        });
+        document.getElementById('soumettre-mdp').addEventListener('click', () => {
+            const MDP = document.getElementById("mdp").value;
+            socket.emit('mdp', MDP);
+        });
+        document.getElementById('msg').addEventListener('click', () => {
+            const msgvalue = document.getElementById("chat").value;
+            socket.emit('msgv', msgvalue);
+        });
+        document.getElementById('mdp').style.display = 'none';
+        document.getElementById('soumettre-mdp').style.display = 'none';
+        document.getElementById('chat').style.display = 'none';
+        document.getElementById('msg').style.display = 'none';
+        document.getElementById('admin').style.display = 'none';
+        socket.on('adminok', ()  => {  
+         document.getElementById("mdp").style.display = "block"; 
+         document.getElementById("soumettre-mdp").style.display = "block";
+         document.getElementById('speudo').style.display = 'none';
+         document.getElementById('soumettre-speudo').style.display = 'none';
+        });
+        socket.on('mdpok', () => {
+          document.getElementById('admin').style.display = 'block';
+        });
+        socket.on('speudook', () => {  
+          document.getElementById('chat').style.display = 'block';
+          document.getElementById('msg').style.display = 'block';
+          document.getElementById("speudo").style.display = "none"; 
+          document.getElementById("soumettre-speudo").style.display = "none";
+        });  
+        document.getElementById("admin").addEventListener("click", function() {
+            window.location.href = "/chat/admin";
+        });     
+</script> 
+</body>   

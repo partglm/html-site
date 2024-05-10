@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+      .h1 {
+          position: absolute;
+          top: 5%;
+          left: 45%;
+          font-size: 45px;
+      }
+      h2 {
+        color: rgb(0, 132, 255);
+        font-size: 30px;
+      }
+      #pseudo {
+          position: absolute;
+          top: 20%;
+          left: 44%;
+          height: 13px;
+      }
+      #pseudol {
+          position: absolute;
+          top: 15%;
+          left: 36%;
+          height: 15px;
+      }
+      #prenom {
+          position: absolute;
+          top: 25%;
+          left: 44%;
+          height: 12px;
+      }
+      #prenoml {
+          position: absolute;
+          top: 20%;
+          left: 36%;
+          height: 12px;
+      }
+      #nom {
+          position: absolute;
+          top: 30%;
+          left: 44%;
+          height: 12px;
+      }
+      #noml {
+          position: absolute;
+          top: 25%;
+          left: 36%;
+          height: 12px;
+      }
+      #classe {
+          position: absolute;
+          top: 35%;
+          left: 44%;
+          height: 12px;
+      }
+      #classel {
+          position: absolute;
+          top: 30%;
+          left: 36%;
+          height: 12px;
+      }
+      #submit {
+          position: absolute;
+          top: 41%;
+          left: 48%;
+          height: 30px;
+          font-size: 20px;
+      }
+      body {
+            background-color: rgb(10, 33, 77);
+      }
+    </style>
+</head>
+<body>
+    <div class="imagef"></div>
+    <h2 class="h1">Sign In</h2>
+        <h2 for="pseudo" id="pseudol">Pseudo :</h2>
+        <input type="text" id="pseudo" name="pseudo" required>
+
+        <h2 for="prenom" id="prenoml">Prénom :</h2>
+        <input type="text" id="prenom" name="prenom" required>
+
+        <h2 for="nom" id="noml">Nom :</h2>
+        <input type="text" id="nom" name="nom" required>
+
+        <h2 for="classe" id="classel">Classe :</h2>
+        <input type="text" id="classe" name="classe" required>
+
+        <input type="submit" id="submit" value="Envoyer">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const prenom = document.getElementById('prenom');
+        const classe = document.getElementById('classe');
+        const pseudo = document.getElementById('pseudo');
+        const nom    =    document.getElementById('nom');
+        const submit = document.getElementById('submit');
+
+        socket.on('pré', () => {
+        alert("votre demande vas peut etre ajouté, bientot. dans le cas ou ils serait ajouté veuillez notez que votre speudo comporteras une virgule a la fin, il serat donc :(votre speudo,)");
+        });
+
+        submit.addEventListener('click', () => {
+           let prenomv = prenom.value;
+           let nomv    =    nom.value;
+           let classev = classe.value;
+           let pseudov = pseudo.value;
+           let pseudovv = pseudov;
+           const formms = [prenomv,nomv,classev,pseudov];
+           socket.emit('fsis', formms);
+           socket.emit('fsisse', pseudovv);
+        });
+    </script>
+</body>
+</html>
