@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<title>chat</title>
+<head>
+  <style>
+    body {
+      background-color: black;     
+    }
+    .message-display {
+      color: white;
+    }
+    .log {
+     color: white;   
+    }
+    #kick {
+      position: absolute;
+      top: 50px;
+      left: 350px;
+    }
+    #ban {
+      position: absolute;
+      top: 75px;
+      left: 350px;
+    }
+    #kickb {
+      position: absolute;
+      top: 50px;
+      left: 450px;
+    }
+    #banb {
+      position: absolute;
+      top: 75px;
+      left: 450px;
+    }
+    #rickroll {
+      position: absolute;
+      top: 100px;
+      left: 350px;
+    }
+
+    #rickb {
+      position: absolute;
+      top: 100px;
+      left: 450px;
+    }
+    #register {
+      position: absolute;
+      top: 150px;
+      left: 400px;
+      color: white;
+    }
+
+    #registerb {
+      position: absolute;
+      top: 170px;
+      left: 390px;
+    }
+  </style>  
+</head>
+<body>
+  <input id="speudo" class="speudo" type="text">
+  <button id="soumettre-speudo" class="soumettre-speudo">soumettre</button>  
+  <input id="mdp" class="mdp" type="text">
+  <input id="chat" class="chat" type="text">
+  <button id="soumettre-mdp" class="soumettre-mdp">soumettre le mdp</button> 
+  <button id="msg" class="msg">envoyé</button>
+  <p id="message-display" class="message-display"></p>
+  <p id="log" class="log"></p>
+  <a href="logfile.txt" download="logfile.txt" >log</a>
+  <input type="text" id="kick" class="kick">
+  <button id="kickb">kick</button>
+  <input type="text" id="rickroll" class="rickroll">
+  <button id="rickb">rickroll</button>
+  <input type="text" id="ban" class="ban">
+  <button id="banb">ban</button>
+  <div id="register"></div>
+  <button id="registerb">accept</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script>
+        const socket = io();
+        let speudova = ''
+        let banv = ''
+        socket.on('fss', forms => {
+          document.getElementById('register').textContent = forms;
+        });
+        document.getElementById('registerb').addEventListener('click', () => {
+          socket.emit('regisc');
+        });
+        document.getElementById('kickb').addEventListener('click', () => {
+            const rspeud = document.getElementById('kick').value;
+            socket.emit('rspeud', rspeud);
+        });
+        socket.on('rickrr', rickr => {
+          if (speudova == rickr) {
+           window.location.href = "/418";
+          }; 
+        }); 
+        document.getElementById('rickb').addEventListener('click', () => {
+            const rickr = document.getElementById('rickroll').value;
+            socket.emit('rickr', rickr);
+        });
+        document.getElementById('banb').addEventListener('click', () => {
+            banv = document.getElementById('ban').value;
+            socket.emit('ban', banv);
+        });
+        socket.on('rspeud', rspeud => {
+          if (speudova == rspeud) {
+           window.location.href = "/401";
+          }; 
+        }); 
+        socket.on('cban', banv => {
+          if (document.getElementById('soumettre-speudo').value == banv) {
+           window.location.href = "/403";
+          }; 
+        });
+        socket.on('cban', () => {
+          if (document.getElementById('soumettre-speudo').value == banv) {
+           window.location.href = "/403";
+          }; 
+        });
+        document.getElementById('soumettre-speudo').addEventListener('click', () => {
+            const speudov = document.getElementById("speudo").value;
+            speudova = speudov;
+            socket.emit('speudo', speudov);
+        });
+        document.getElementById('soumettre-mdp').addEventListener('click', () => {
+            const MDP = document.getElementById("mdp").value;
+            socket.emit('mdp', MDP);
+        });
+        document.getElementById('msg').addEventListener('click', () => {
+            const msgvalue = document.getElementById("chat").value;
+            socket.emit('msgv', msgvalue);
+        });
+        document.getElementById('mdp').style.display = 'none';
+        document.getElementById('soumettre-mdp').style.display = 'none';
+        document.getElementById('chat').style.display = 'none';
+        document.getElementById('msg').style.display = 'none';
+        document.getElementById('log').style.display = 'none';
+        document.getElementById("kick").style.display = 'none';
+        document.getElementById("kickb").style.display = 'none';
+        document.getElementById("rickroll").style.display = 'none';
+        document.getElementById("rickb").style.display = 'none';
+        document.getElementById("ban").style.display = 'none';
+        document.getElementById("banb").style.display = 'none';
+        document.getElementById("registerb").style.display = 'none';
+        socket.on('adminok', ()  => {  
+         document.getElementById("mdp").style.display = "block"; 
+         document.getElementById("soumettre-mdp").style.display = "block";
+         document.getElementById('speudo').style.display = 'none';
+         document.getElementById('soumettre-speudo').style.display = 'none';
+        });
+        socket.on('mdpok', () => {
+          document.getElementById('chat').style.display = 'block';
+          document.getElementById('msg').style.display = 'block';
+          document.getElementById("mdp").style.display = "none"; 
+          document.getElementById("soumettre-mdp").style.display = "none";
+          document.getElementById("log").style.display = "block";
+          document.getElementById("kick").style.display = 'block';
+          document.getElementById("kickb").style.display = 'block';
+          document.getElementById("rickroll").style.display = 'block';
+          document.getElementById("rickb").style.display = 'block';
+          document.getElementById("ban").style.display = 'block';
+          document.getElementById("banb").style.display = 'block';
+          document.getElementById("registerb").style.display = 'block';
+        });
+        socket.on('speudook', () => {  
+          document.getElementById('chat').style.display = 'block';
+          document.getElementById('msg').style.display = 'block';
+          document.getElementById("speudo").style.display = "none"; 
+          document.getElementById("soumettre-speudo").style.display = "none";
+        });
+        socket.on('message', (msg) => {
+            simulateSocketMessage(msg);
+        });
+
+        function simulateSocketMessage(message) {
+            messages.unshift(message);
+            if (messages.length > 10) {
+                messages.pop();
+              }
+            updateMessages();
+        };
+
+        function updateMessages() {
+            const messageContainer = document.getElementById('message-display');
+            messageContainer.innerHTML = '';
+            messages.forEach((message, index) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = `${index + 1}. ${message}`;
+                messageContainer.appendChild(messageDiv);
+            });
+        };
+       
+        const message = [];
+        const messages = [];
+        
+        socket.on('log', (log) => {
+            simulateSocketMessage(log);
+        });
+
+        function simulateSocketMessage(message) {
+            messages.unshift(message);
+            if (messages.length > 100) {
+                messages.pop();
+              }
+            updateMessages();
+        };
+
+        function updateMessages() {
+            const messageContainer = document.getElementById('log');
+            messageContainer.innerHTML = '';
+            messages.forEach((message, index) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = `${index + 1}. ${message}`;
+                messageContainer.appendChild(messageDiv);
+            });
+        };
+</script>  
+</body>   

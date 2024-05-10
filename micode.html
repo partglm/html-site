@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>quiz</title>
+   <link type="stylesheet" href="stylele.css">
+   <style>
+    #buttonto {
+     position: absolute;
+      left: 250px;  
+    }
+    body {
+     background-color: black;    
+    }
+    .button {
+     --color: #00A97F;
+     padding: 0.8em 1.7em;
+     background-color: transparent;
+     border-radius: .3em;
+     position: relative;
+     overflow: hidden;
+     cursor: pointer;
+     transition: .5s;
+     font-weight: 400;
+     font-size: 17px;
+     border: 1px solid;
+     font-family: inherit;
+     text-transform: uppercase;
+     color: var(--color);
+     z-index: 1;
+     top: 100px;
+    }    
+    .button::before, .button::after {
+     content: '';
+     display: block;
+     width: 50px;
+     height: 50px;
+     transform: translate(-50%, -50%);
+     position: absolute;
+     border-radius: 50%;
+     z-index: -1;
+     background-color: var(--color);
+     transition: 1s ease;
+    }    
+    .button::before {
+     top: -1em;
+     left: -1em;
+    }    
+    .button::after {
+     left: calc(100% + 1em);
+     top: calc(100% + 1em);
+    }    
+    .button:hover::before, .button:hover::after {
+     height: 410px;
+     width: 410px;
+    }    
+    .button:hover {
+     color: rgb(10, 25, 30);
+    }    
+    .button:active {
+     filter: brightness(.8);
+    }    
+    #finish {
+     top: 190px;
+     left: 750px;
+     color: white;
+     position: fixed;
+     text-align: center;   
+    }
+    #question_1 {
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #questionback {
+     border-radius: 14px;
+     background: #660000;
+     box-shadow:  20px 20px 39px #460000,
+     -20px -20px 39px #860000;
+     max-width: 380px;
+     height: 40px;
+     position: relative;
+     left: 580px;
+     top: 195px; 
+    }
+    #réponse_1_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #réponse_1_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #réponse_1_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #réponse_1_4 {
+     margin: 0; 
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_2 {
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_2_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_2_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_2_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_2_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_3 {
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_3_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_3_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_3_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_3_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_4{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_4_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_4_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_4_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_4_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_5{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_5_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_5_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_5_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_5_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_6{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_6_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_6_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_6_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_6_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_7{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_7_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_7_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_7_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_7_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_8{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_8_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_8_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_8_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_8_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_9{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_9_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_9_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_9_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_9_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_10{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_10_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_10_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_10_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_10_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_11{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_11_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_11_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_11_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_11_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_12{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_12_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_12_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_12_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_12_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_13{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_13_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_13_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_13_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_13_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_14{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_14_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_14_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_14_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_14_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+    #question_15{
+     position: fixed;
+     text-align: center;
+     color: white;
+     top: 190px;
+     left: 600px;
+    }
+    #reponse_15_1 {
+     margin: 0;
+     position: absolute;
+     top: 95px;
+     left: 150px;
+    }
+    #reponse_15_2 {
+     margin: 0;
+     position: absolute;
+     top: 120px;
+     left: 150px;
+    }
+    #reponse_15_3 {
+     margin: 0;
+     position: absolute;
+     top: 145px;
+     left: 150px;
+    }
+    #reponse_15_4 {
+     margin: 0;
+     position: absolute;
+     top: 170px;
+     left: 150px;
+    }
+   </style>
+</head>
+<body>
+    <div id="questionback" class="questionback">
+    <button id="button" class="button"> chat</button>
+    <button id="buttonto" class="button">Calculatrice</button>    
+    <div id="finish" class="finish">
+        <h2>bravo !!!</h2>
+    </div>    
+    <div id="question_1">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_2">
+        <h2>quelle est la capitale de la france ????</h2>
+    </div>
+    <div id="question_3">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_4">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_5">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_6">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_7">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_8">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_9">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_10">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_11">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_12">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_13">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_14">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="question_15">
+        <h2>quelle est la capitale de la france ?</h2>
+    </div>
+    <div id="réponse_1_1">
+        <input type="submit" value="paris"  onclick="question2()">
+    </div>
+    <div id="réponse_1_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="réponse_1_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="réponse_1_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_2_1">
+        <input type="submit" value="paris" onclick="question3()">
+    </div>
+    <div id="reponse_2_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_2_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_2_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_3_1">
+        <input type="submit" value="paris" onclick="question4()">
+    </div>
+    <div id="reponse_3_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_3_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_3_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_4_1">
+        <input type="submit" value="paris" onclick="question5()">
+    </div>
+    <div id="reponse_4_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_4_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_4_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_5_1">
+        <input type="submit" value="paris" onclick="question6()">
+    </div>
+    <div id="reponse_5_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_5_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_5_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_6_1">
+        <input type="submit" value="paris" onclick="question7()">
+    </div>
+    <div id="reponse_6_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_6_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_6_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_7_1">
+        <input type="submit" value="paris" onclick="question8()">
+    </div>
+    <div id="reponse_7_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_7_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_7_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_8_1">
+        <input type="submit" value="paris" onclick="question9()">
+    </div>
+    <div id="reponse_8_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_8_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_8_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_9_1">
+        <input type="submit" value="paris" onclick="question10()">
+    </div>
+    <div id="reponse_9_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_9_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_9_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_10_1">
+        <input type="submit" value="paris" onclick="question11()">
+    </div>
+    <div id="reponse_10_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_10_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_10_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_11_1">
+        <input type="submit" value="paris" onclick="question12()">
+    </div>
+    <div id="reponse_11_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_11_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_11_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_12_1">
+        <input type="submit" value="paris" onclick="question13()">
+    </div>
+    <div id="reponse_12_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_12_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_12_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_13_1">
+        <input type="submit" value="paris" onclick="question14()">
+    </div>
+    <div id="reponse_13_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_13_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_13_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_14_1">
+        <input type="submit" value="paris" onclick="question15()">
+    </div>
+    <div id="reponse_14_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_14_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_14_4">
+        <input type="submit" value="rennes">
+    </div>
+    <div id="reponse_15_1">
+        <input type="submit" value="paris" onclick="fin()">
+    </div>
+    <div id="reponse_15_2">
+        <input type="submit" value="lyon">
+    </div>
+    <div id="reponse_15_3">
+        <input type="submit" value="marseille">
+    </div>
+    <div id="reponse_15_4">
+        <input type="submit" value="rennes">
+    </div>
+    <script>  
+      document.getElementById("question_1").style.display = "block";
+      document.getElementById("réponse_1_1").style.display = "block";
+      document.getElementById("réponse_1_2").style.display = "block";
+      document.getElementById("réponse_1_3").style.display = "block";
+      document.getElementById("réponse_1_4").style.display = "block";
+      document.getElementById("question_2").style.display = "none";
+      document.getElementById("reponse_2_1").style.display = "none";
+      document.getElementById("reponse_2_2").style.display = "none";
+      document.getElementById("reponse_2_3").style.display = "none";
+      document.getElementById("reponse_2_4").style.display = "none";
+      document.getElementById("question_2").style.display = "none";
+      document.getElementById("reponse_2_1").style.display = "none";
+      document.getElementById("reponse_2_2").style.display = "none";
+      document.getElementById("reponse_2_3").style.display = "none";
+      document.getElementById("reponse_2_4").style.display = "none";
+      document.getElementById("question_3").style.display = "none";
+      document.getElementById("reponse_3_1").style.display = "none";
+      document.getElementById("reponse_3_2").style.display = "none";
+      document.getElementById("reponse_3_3").style.display = "none";
+      document.getElementById("reponse_3_4").style.display = "none";  
+      document.getElementById("question_3").style.display = "none";
+      document.getElementById("reponse_3_1").style.display = "none";
+      document.getElementById("reponse_3_2").style.display = "none";
+      document.getElementById("reponse_3_3").style.display = "none";
+      document.getElementById("reponse_3_4").style.display = "none";
+      document.getElementById("question_4").style.display = "none";
+      document.getElementById("reponse_4_1").style.display = "none";  
+      document.getElementById("reponse_4_2").style.display = "none";
+      document.getElementById("reponse_4_3").style.display = "none"; 
+      document.getElementById("reponse_4_4").style.display = "none";
+      document.getElementById("question_4").style.display = "none";
+      document.getElementById("reponse_4_1").style.display = "none";  
+      document.getElementById("reponse_4_2").style.display = "none";
+      document.getElementById("reponse_4_3").style.display = "none"; 
+      document.getElementById("reponse_4_4").style.display = "none";
+      document.getElementById("question_5").style.display = "none";   
+      document.getElementById("reponse_5_1").style.display = "none";    
+      document.getElementById("reponse_5_2").style.display = "none";     
+      document.getElementById("reponse_5_3").style.display = "none";      
+      document.getElementById("reponse_5_4").style.display = "none";  
+      document.getElementById("question_5").style.display = "none";   
+      document.getElementById("reponse_5_1").style.display = "none";    
+      document.getElementById("reponse_5_2").style.display = "none";     
+      document.getElementById("reponse_5_3").style.display = "none";      
+      document.getElementById("reponse_5_4").style.display = "none";
+      document.getElementById("question_6").style.display = "none";        
+      document.getElementById("reponse_6_1").style.display = "none";         
+      document.getElementById("reponse_6_2").style.display = "none";          
+      document.getElementById("reponse_6_3").style.display = "none";            
+      document.getElementById("reponse_6_4").style.display = "none";        
+      document.getElementById("question_6").style.display = "none";        
+      document.getElementById("reponse_6_1").style.display = "none";         
+      document.getElementById("reponse_6_2").style.display = "none";          
+      document.getElementById("reponse_6_3").style.display = "none";            
+      document.getElementById("reponse_6_4").style.display = "none";
+      document.getElementById("question_7").style.display = "none";
+      document.getElementById("reponse_7_1").style.display = "none";              
+      document.getElementById("reponse_7_2").style.display = "none";               
+      document.getElementById("reponse_7_3").style.display = "none";                
+      document.getElementById("reponse_7_4").style.display = "none";            
+      document.getElementById("question_7").style.display = "none";
+      document.getElementById("reponse_7_1").style.display = "none";              
+      document.getElementById("reponse_7_2").style.display = "none";               
+      document.getElementById("reponse_7_3").style.display = "none";                
+      document.getElementById("reponse_7_4").style.display = "none";
+      document.getElementById("question_8").style.display = "none";                  
+      document.getElementById("reponse_8_1").style.display = "none";                   
+      document.getElementById("reponse_8_2").style.display = "none";                   
+      document.getElementById("reponse_8_3").style.display = "none";                   
+      document.getElementById("reponse_8_4").style.display = "none";               
+      document.getElementById("question_8").style.display = "none";                  
+      document.getElementById("reponse_8_1").style.display = "none";                   
+      document.getElementById("reponse_8_2").style.display = "none";                   
+      document.getElementById("reponse_8_3").style.display = "none";                   
+      document.getElementById("reponse_8_4").style.display = "none";
+      document.getElementById("question_9").style.display = "none";
+      document.getElementById("reponse_9_1").style.display = "none"; 
+      document.getElementById("reponse_9_2").style.display = "none";
+      document.getElementById("reponse_9_3").style.display = "none";
+      document.getElementById("reponse_9_4").style.display = "none"; 
+      document.getElementById("question_9").style.display = "none";
+      document.getElementById("reponse_9_1").style.display = "none"; 
+      document.getElementById("reponse_9_2").style.display = "none";
+      document.getElementById("reponse_9_3").style.display = "none";
+      document.getElementById("reponse_9_4").style.display = "none";
+      document.getElementById("question_10").style.display = "none";
+      document.getElementById("reponse_10_1").style.display = "none";
+      document.getElementById("reponse_10_2").style.display = "none";
+      document.getElementById("reponse_10_3").style.display = "none";
+      document.getElementById("reponse_10_4").style.display = "none";
+      document.getElementById("question_10").style.display = "none";
+      document.getElementById("reponse_10_1").style.display = "none";
+      document.getElementById("reponse_10_2").style.display = "none";
+      document.getElementById("reponse_10_3").style.display = "none";
+      document.getElementById("reponse_10_4").style.display = "none";
+      document.getElementById("question_11").style.display = "none";
+      document.getElementById("reponse_11_1").style.display = "none";
+      document.getElementById("reponse_11_2").style.display = "none";
+      document.getElementById("reponse_11_3").style.display = "none";
+      document.getElementById("reponse_11_4").style.display = "none";
+      document.getElementById("question_11").style.display = "none";
+      document.getElementById("reponse_11_1").style.display = "none";
+      document.getElementById("reponse_11_2").style.display = "none";
+      document.getElementById("reponse_11_3").style.display = "none";
+      document.getElementById("reponse_11_4").style.display = "none";
+      document.getElementById("question_12").style.display = "none";
+      document.getElementById("reponse_12_1").style.display = "none";
+      document.getElementById("reponse_12_2").style.display = "none";
+      document.getElementById("reponse_12_3").style.display = "none";
+      document.getElementById("reponse_12_4").style.display = "none";
+      document.getElementById("question_12").style.display = "none";
+      document.getElementById("reponse_12_1").style.display = "none";
+      document.getElementById("reponse_12_2").style.display = "none";
+      document.getElementById("reponse_12_3").style.display = "none";
+      document.getElementById("reponse_12_4").style.display = "none";
+      document.getElementById("question_13").style.display = "none";
+      document.getElementById("reponse_13_1").style.display = "none";
+      document.getElementById("reponse_13_2").style.display = "none";
+      document.getElementById("reponse_13_3").style.display = "none";
+      document.getElementById("reponse_13_4").style.display = "none"; 
+      document.getElementById("question_13").style.display = "none";
+      document.getElementById("reponse_13_1").style.display = "none";
+      document.getElementById("reponse_13_2").style.display = "none";
+      document.getElementById("reponse_13_3").style.display = "none";
+      document.getElementById("reponse_13_4").style.display = "none";
+      document.getElementById("question_14").style.display = "none";
+      document.getElementById("reponse_14_1").style.display = "none";
+      document.getElementById("reponse_14_2").style.display = "none";
+      document.getElementById("reponse_14_3").style.display = "none";
+      document.getElementById("reponse_14_4").style.display = "none";
+      document.getElementById("question_14").style.display = "none";
+      document.getElementById("reponse_14_1").style.display = "none";
+      document.getElementById("reponse_14_2").style.display = "none";
+      document.getElementById("reponse_14_3").style.display = "none";
+      document.getElementById("reponse_14_4").style.display = "none";
+      document.getElementById("question_15").style.display = "none";
+      document.getElementById("reponse_15_1").style.display = "none";
+      document.getElementById("reponse_15_2").style.display = "none";
+      document.getElementById("reponse_15_3").style.display = "none";
+      document.getElementById("reponse_15_4").style.display = "none";
+      document.getElementById("finish").style.display = "none";
+
+      function question2() {  
+       document.getElementById("question_1").style.display = "none";
+       document.getElementById("réponse_1_1").style.display = "none";
+       document.getElementById("réponse_1_2").style.display = "none";
+       document.getElementById("réponse_1_3").style.display = "none";
+       document.getElementById("réponse_1_4").style.display = "none";
+       document.getElementById("question_2").style.display = "block";
+       document.getElementById("reponse_2_1").style.display = "block";
+       document.getElementById("reponse_2_2").style.display = "block";
+       document.getElementById("reponse_2_3").style.display = "block";
+       document.getElementById("reponse_2_4").style.display = "block";
+      }; 
+      function question3() {
+       document.getElementById("question_2").style.display = "none";
+       document.getElementById("reponse_2_1").style.display = "none";
+       document.getElementById("reponse_2_2").style.display = "none";
+       document.getElementById("reponse_2_3").style.display = "none";
+       document.getElementById("reponse_2_4").style.display = "none";
+       document.getElementById("question_3").style.display = "block";
+       document.getElementById("reponse_3_1").style.display = "block";
+       document.getElementById("reponse_3_2").style.display = "block";
+       document.getElementById("reponse_3_3").style.display = "block";
+       document.getElementById("reponse_3_4").style.display = "block";
+      };
+      function question4() {   
+       document.getElementById("question_3").style.display = "none";
+       document.getElementById("reponse_3_1").style.display = "none";
+       document.getElementById("reponse_3_2").style.display = "none";
+       document.getElementById("reponse_3_3").style.display = "none";
+       document.getElementById("reponse_3_4").style.display = "none";
+       document.getElementById("question_4").style.display = "block";
+       document.getElementById("reponse_4_1").style.display = "block";  
+       document.getElementById("reponse_4_2").style.display = "block";
+       document.getElementById("reponse_4_3").style.display = "block"; 
+       document.getElementById("reponse_4_4").style.display = "block";
+      }; 
+      function question5() {
+       document.getElementById("question_4").style.display = "none";
+       document.getElementById("reponse_4_1").style.display = "none";  
+       document.getElementById("reponse_4_2").style.display = "none";
+       document.getElementById("reponse_4_3").style.display = "none"; 
+       document.getElementById("reponse_4_4").style.display = "none";
+       document.getElementById("question_5").style.display = "block";   
+       document.getElementById("reponse_5_1").style.display = "block";    
+       document.getElementById("reponse_5_2").style.display = "block";     
+       document.getElementById("reponse_5_3").style.display = "block";      
+       document.getElementById("reponse_5_4").style.display = "block";  
+      };
+      function question6() {
+       document.getElementById("question_5").style.display = "none";   
+       document.getElementById("reponse_5_1").style.display = "none";    
+       document.getElementById("reponse_5_2").style.display = "none";     
+       document.getElementById("reponse_5_3").style.display = "none";      
+       document.getElementById("reponse_5_4").style.display = "none";
+       document.getElementById("question_6").style.display = "block";        
+       document.getElementById("reponse_6_1").style.display = "block";         
+       document.getElementById("reponse_6_2").style.display = "block";          
+       document.getElementById("reponse_6_3").style.display = "block";            
+       document.getElementById("reponse_6_4").style.display = "block";  
+      }; 
+      function question7() {     
+       document.getElementById("question_6").style.display = "none";        
+       document.getElementById("reponse_6_1").style.display = "none";         
+       document.getElementById("reponse_6_2").style.display = "none";          
+       document.getElementById("reponse_6_3").style.display = "none";            
+       document.getElementById("reponse_6_4").style.display = "none";
+       document.getElementById("question_7").style.display = "block";
+       document.getElementById("reponse_7_1").style.display = "block";              
+       document.getElementById("reponse_7_2").style.display = "block";               
+       document.getElementById("reponse_7_3").style.display = "block";                
+       document.getElementById("reponse_7_4").style.display = "block";
+      };
+      function question8() {            
+       document.getElementById("question_7").style.display = "none";
+       document.getElementById("reponse_7_1").style.display = "none";              
+       document.getElementById("reponse_7_2").style.display = "none";               
+       document.getElementById("reponse_7_3").style.display = "none";                
+       document.getElementById("reponse_7_4").style.display = "none";
+       document.getElementById("question_8").style.display = "block";                  
+       document.getElementById("reponse_8_1").style.display = "block";                   
+       document.getElementById("reponse_8_2").style.display = "block";                   
+       document.getElementById("reponse_8_3").style.display = "block";                   
+       document.getElementById("reponse_8_4").style.display = "block";         
+      };
+      function question9() {        
+       document.getElementById("question_8").style.display = "none";                  
+       document.getElementById("reponse_8_1").style.display = "none";                   
+       document.getElementById("reponse_8_2").style.display = "none";                   
+       document.getElementById("reponse_8_3").style.display = "none";                   
+       document.getElementById("reponse_8_4").style.display = "none";
+       document.getElementById("question_9").style.display = "block";
+       document.getElementById("reponse_9_1").style.display = "block"; 
+       document.getElementById("reponse_9_2").style.display = "block";
+       document.getElementById("reponse_9_3").style.display = "block";
+       document.getElementById("reponse_9_4").style.display = "block";
+      };
+      function question10 () {
+       document.getElementById("question_9").style.display = "none";
+       document.getElementById("reponse_9_1").style.display = "none"; 
+       document.getElementById("reponse_9_2").style.display = "none";
+       document.getElementById("reponse_9_3").style.display = "none";
+       document.getElementById("reponse_9_4").style.display = "none";
+       document.getElementById("question_10").style.display = "block";
+       document.getElementById("reponse_10_1").style.display = "block";
+       document.getElementById("reponse_10_2").style.display = "block";
+       document.getElementById("reponse_10_3").style.display = "block";
+       document.getElementById("reponse_10_4").style.display = "block";
+      };
+      function question11() {
+       document.getElementById("question_10").style.display = "none";
+       document.getElementById("reponse_10_1").style.display = "none";
+       document.getElementById("reponse_10_2").style.display = "none";
+       document.getElementById("reponse_10_3").style.display = "none";
+       document.getElementById("reponse_10_4").style.display = "none";
+       document.getElementById("question_11").style.display = "block";
+       document.getElementById("reponse_11_1").style.display = "block";
+       document.getElementById("reponse_11_2").style.display = "block";
+       document.getElementById("reponse_11_3").style.display = "block";
+       document.getElementById("reponse_11_4").style.display = "block";
+      };
+      function question12() {
+       document.getElementById("question_11").style.display = "none";
+       document.getElementById("reponse_11_1").style.display = "none";
+       document.getElementById("reponse_11_2").style.display = "none";
+       document.getElementById("reponse_11_3").style.display = "none";
+       document.getElementById("reponse_11_4").style.display = "none";
+       document.getElementById("question_12").style.display = "block";
+       document.getElementById("reponse_12_1").style.display = "block";
+       document.getElementById("reponse_12_2").style.display = "block";
+       document.getElementById("reponse_12_3").style.display = "block";
+       document.getElementById("reponse_12_4").style.display = "block";
+      };
+      function question13() {
+       document.getElementById("question_12").style.display = "none";
+       document.getElementById("reponse_12_1").style.display = "none";
+       document.getElementById("reponse_12_2").style.display = "none";
+       document.getElementById("reponse_12_3").style.display = "none";
+       document.getElementById("reponse_12_4").style.display = "none";
+       document.getElementById("question_13").style.display = "block";
+       document.getElementById("reponse_13_1").style.display = "block";
+       document.getElementById("reponse_13_2").style.display = "block";
+       document.getElementById("reponse_13_3").style.display = "block";
+       document.getElementById("reponse_13_4").style.display = "block";
+      };
+      function question14() {
+       document.getElementById("question_13").style.display = "none";
+       document.getElementById("reponse_13_1").style.display = "none";
+       document.getElementById("reponse_13_2").style.display = "none";
+       document.getElementById("reponse_13_3").style.display = "none";
+       document.getElementById("reponse_13_4").style.display = "none";
+       document.getElementById("question_14").style.display = "block";
+       document.getElementById("reponse_14_1").style.display = "block";
+       document.getElementById("reponse_14_2").style.display = "block";
+       document.getElementById("reponse_14_3").style.display = "block";
+       document.getElementById("reponse_14_4").style.display = "block";
+      };
+      function question15() {
+       document.getElementById("question_14").style.display = "none";
+       document.getElementById("reponse_14_1").style.display = "none";
+       document.getElementById("reponse_14_2").style.display = "none";
+       document.getElementById("reponse_14_3").style.display = "none";
+       document.getElementById("reponse_14_4").style.display = "none";
+       document.getElementById("question_15").style.display = "block";
+       document.getElementById("reponse_15_1").style.display = "block";
+       document.getElementById("reponse_15_2").style.display = "block";
+       document.getElementById("reponse_15_3").style.display = "block";
+       document.getElementById("reponse_15_4").style.display = "block";
+      };
+      function fin() {
+       document.getElementById("question_15").style.display = "none";
+       document.getElementById("reponse_15_1").style.display = "none";
+       document.getElementById("reponse_15_2").style.display = "none";
+       document.getElementById("reponse_15_3").style.display = "none";
+       document.getElementById("reponse_15_4").style.display = "none";
+       document.getElementById("finish").style.display = "block";
+      };
+      document.getElementById("button").addEventListener("click", function() {
+            window.location.href = "/chat";
+      });
+      document.getElementById('buttonto').addEventListener('click', function() {
+            window.location.href = "/cal";
+      })
+    </script>
+</body>    
+</html>

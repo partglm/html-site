@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice en ligne</title>
+    <style>
+       #button1 {
+       position: absolute;
+       top: 0px;
+       left: 20px;
+       width: 50px;
+      }
+      #button2 {
+       position: absolute;
+       top: 0px;
+       left: 75px;
+       width: 50px;
+      }
+      #button3 {
+       position: absolute;
+       top: 0px;
+       left: 130px;
+       width: 50px;
+      }
+      #button4 {
+       position: absolute;
+       top: 60px;
+       left: 20px;
+       width: 50px;
+      }
+      #button5 {
+       position: absolute;
+       top: 60px;
+       left: 75px;
+       width: 50px;
+      }
+      #button6 {
+       position: absolute;
+       top: 60px;
+       left: 130px;
+       width: 50px;
+      }
+      #button7 {
+       position: absolute;
+       top: 120px;
+       left: 20px;
+       width: 50px;
+      }
+      #button8 {
+       position: absolute;
+       top: 120px;
+       left: 75px;
+       width: 50px;
+      }
+      #button9 {
+       position: absolute;
+       top: 120px;
+       left: 130px;
+       width: 50px;
+      }
+      #submit {
+        position: absolute;
+        top: 180px;
+        left: 20px;
+        width: 105px;
+      }
+      #add {
+       position: absolute;
+       top: 0px;
+       left: 185px;
+       width: 50px;
+      }
+
+      #sou {
+        position: absolute;
+        top: 60px;
+        left: 185px;
+        width: 50px;
+      }
+
+      #div {
+        position: absolute;
+        left: 185px;
+        top: 120px;
+        width: 50px;
+      }
+
+      #mul {
+        position: absolute;
+        left: 185px;
+        top: 180px;
+        width: 50px;
+      }
+      #result {
+        position: absolute;
+        top: 270px;
+        left: 20px;
+        width: 215px;
+        height: 50px;
+      }
+      #button0 {
+        position: absolute;
+        left: 130px;
+        top: 180px;
+        width: 50px;
+      }
+      button {
+       background-color: #eee;
+       border: none;
+       padding: 1rem;
+       font-size: 1rem;
+       width: 10em;
+       border-radius: 1rem;
+       color: lightcoral;
+       box-shadow: 0 0.4rem #dfd9d9;
+       cursor: pointer;
+     }
+     
+     button:active {
+      color: white;
+      box-shadow: 0 0.2rem #dfd9d9;
+      transform: translateY(0.2rem);
+     }
+     
+     button:hover:not(:disabled) {
+      background: lightcoral;
+      color: white;
+      text-shadow: 0 0.1rem #bcb4b4;
+     }
+     
+     button:disabled {
+      cursor: auto;
+      color: grey;
+     }
+    </style>
+</head>
+<body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+ <button class="cb" id="button1" onclick="add1()">1</button> 
+ <button class="cb" id="button2" onclick="add2()">2</button>
+ <button class="cb" id="button3" onclick="add3()">3</button>
+ <button class="cb" id="button4" onclick="add4()">4</button>
+ <button class="cb" id="button5" onclick="add5()">5</button>
+ <button class="cb" id="button6" onclick="add6()">6</button>
+ <button class="cb" id="button7" onclick="add7()">7</button>
+ <button class="cb" id="button8" onclick="add8()">8</button>
+ <button class="cb" id="button9" onclick="add9()">9</button>
+ <button class="cb" id="button0" onclick="add0()">0</button>    
+ <button class="cb" id="add" onclick="add()">+</button> 
+ <button class="cb" id="sou" onclick="sou()">-</button> 
+ <button class="cb" id="div" onclick="div()">/</button> 
+ <button class="cb" id="mul" onclick="mul()">x</button> 
+ <button class="cb" id="submit" onclick="submit()">submit</button>
+ <button class="cb" id="result"></button>  
+ <div id="qq"></div>
+ <script> 
+     let socket = io();
+     let number1 = 0;
+     let number2 = 0;
+     let signe = 'a';
+     let signet = false;
+     socket.on('result' , result => {
+      document.getElementById('result').textContent = result;
+     });
+     document.addEventListener("keydown", function(event) {
+       if (event.key === "*") {
+         var bouton = document.getElementById("mul");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "-") {
+         var bouton = document.getElementById("sou");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "+") {
+         var bouton = document.getElementById("add");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "/") {
+         var bouton = document.getElementById("div");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "Enter") {
+         var bouton = document.getElementById("submit");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "9") {
+         var bouton = document.getElementById("button9");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "8") {
+         var bouton = document.getElementById("button8");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "7") {
+         var bouton = document.getElementById("button7");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "6") {
+         var bouton = document.getElementById("button6");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "5") {
+         var bouton = document.getElementById("button5");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "4") {
+         var bouton = document.getElementById("button4");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "3") {
+         var bouton = document.getElementById("button3");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "2") {
+         var bouton = document.getElementById("button2");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "1") {
+         var bouton = document.getElementById("button1");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+      document.addEventListener("keydown", function(event) {
+       if (event.key === "0") {
+         var bouton = document.getElementById("button0");
+       if (bouton) {
+        bouton.click();
+        }
+       }
+      });
+    function add1() {
+     if (signet == false) {
+      number1 = number1 * 10 + 1
+     }else{
+      number2 = number2 * 10 + 1
+     };
+   };
+   function add2() {
+     if (signet == false) {
+      number1 = number1 * 10 + 2
+     }else{
+      number2 = number2 * 10 + 2
+     };
+   };
+   function add3() {
+     if (signet == false) {
+      number1 = number1 * 10 + 3
+     }else{
+      number2 = number2 * 10 + 3
+     };
+   };
+   function add4() {
+     if (signet == false) {
+      number1 = number1 * 10 + 4
+     }else{
+      number2 = number2 * 10 + 4
+     };
+   };
+   function add5() {
+     if (signet == false) {
+      number1 = number1 * 10 + 5
+     }else{
+      number2 = number2 * 10 + 5
+     };
+   };
+   function add6() {
+     if (signet == false) {
+      number1 = number1 * 10 + 6
+     }else{
+      number2 = number2 * 10 + 6
+     };
+   };
+   function add7() {
+     if (signet == false) {
+      number1 = number1 * 10 + 7
+     }else{
+      number2 = number2 * 10 + 7
+     };
+   };
+   function add8() {
+     if (signet == false) {
+      number1 = number1 * 10 + 8
+     }else{
+      number2 = number2 * 10 + 8
+     };
+   };
+   function add9() {
+     if (signet == false) {
+      number1 = number1 * 10 + 9
+     }else{
+      number2 = number2 * 10 + 9
+     };
+   };
+   function add0() {
+     if (signet == false) {
+      number1 = number1 * 10
+     }else{
+      number2 = number2 * 10
+     };
+   };
+    function mul() {
+       signe = "x" ;
+       signet = true;
+    };
+    function div() {
+       signe = "/" ;
+       signet = true;
+    };
+    function sou() {
+       signe = "-" ;
+       signet = true;
+    };
+    function add() {
+       signe = "+" ;
+       signet = true;
+    };
+
+    function submit() {
+      socket.emit('submit', number1,number2,signe);
+     // document.getElementById('qq').textContent = number1;
+      number1 = 0;
+      number2 = 0;
+      signet = false;
+    };
+</script> 
+</body>
+</html>
