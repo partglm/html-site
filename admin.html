@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<title>chat</title>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chat</title>
+  <html lang="fr"></html>
   <style>
     body {
       background-color: black;     
@@ -57,20 +60,20 @@
   </style>  
 </head>
 <body>
-  <input id="speudo" class="speudo" type="text">
+  <input id="speudo" class="speudo" type="text" placeholder=".">
   <button id="soumettre-speudo" class="soumettre-speudo">soumettre</button>  
-  <input id="mdp" class="mdp" type="text">
-  <input id="chat" class="chat" type="text">
+  <input id="mdp" class="mdp" type="text" placeholder=".">
+  <input id="chat" class="chat" type="text" placeholder=".">
   <button id="soumettre-mdp" class="soumettre-mdp">soumettre le mdp</button> 
   <button id="msg" class="msg">envoyé</button>
   <p id="message-display" class="message-display"></p>
   <p id="log" class="log"></p>
   <a href="logfile.txt" download="logfile.txt" >log</a>
-  <input type="text" id="kick" class="kick">
+  <input type="text" id="kick" class="kick" placeholder=".">
   <button id="kickb">kick</button>
-  <input type="text" id="rickroll" class="rickroll">
+  <input type="text" id="rickroll" class="rickroll" placeholder=".">
   <button id="rickb">rickroll</button>
-  <input type="text" id="ban" class="ban">
+  <input type="text" id="ban" class="ban" placeholder=".">
   <button id="banb">ban</button>
   <div id="register"></div>
   <button id="registerb">accept</button>
@@ -194,10 +197,10 @@
         const messages = [];
         
         socket.on('log', (log) => {
-            simulateSocketMessage(log);
+            simulateSocketMessag(log);
         });
 
-        function simulateSocketMessage(message) {
+        function simulateSocketMessag(message) {
             messages.unshift(message);
             if (messages.length > 100) {
                 messages.pop();
